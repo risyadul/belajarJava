@@ -1,4 +1,4 @@
-package bebas;
+package TugasPertama;
 
 public class DeklarasiVariable {
 	public static void main(String[] args) {		

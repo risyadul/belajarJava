@@ -1,6 +1,7 @@
 package bebas;
 
 public class CetakParameter {
+	
 	void printParam(String str) {
 		System.out.println(str);
 	}

@@ -1,9 +1,9 @@
-package bebas;
+package TugasKedua;
 
 import java.util.Arrays;
 import java.util.Collections;
 
-public class minMaxArray {
+public class MinMax {
 	public static void main(String[] args) {
         Integer[] minMax = {2, 1, 5, 4, 3, 6};
         int min = Collections.min(Arrays.asList(minMax));

@@ -1,13 +1,14 @@
-package bebas;
+package TugasKedua;
 
-public class CetakParameter {
+
+public class FunctionParam {
 	void printParam(String str) {
 		System.out.println(str);
 	}
 	
 	
 	public static void main(String[] args) {
-		CetakParameter cetak = new CetakParameter();
+		FunctionParam cetak = new FunctionParam();
 		cetak.printParam("saya sumpah pocong akan memfollow ig @risanjayy");
 	}
 }
