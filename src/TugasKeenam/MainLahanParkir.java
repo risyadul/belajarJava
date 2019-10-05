@@ -4,7 +4,7 @@ import java.util.*;
 
 public class MainLahanParkir {
 
-	LahanParkir objLahan = new LahanParkir();
+LahanParkir objLahan = new LahanParkir();
 	
 	public void kurangiSlotParkir() {
 		if (objLahan.getSlotParkir() == 0) {
@@ -15,66 +15,85 @@ public class MainLahanParkir {
 	}
 	
 	public void tambahSlotParkir() {
-		if (objLahan.getSlotParkir() == objLahan.getNomorPolice().length) {
+		if (objLahan.getSlotParkir() == 10) {
 			System.out.println("Slot Parkir Sudah Penuh, Silahkan Follow Ig @risanjayy");
 		}else {
 			objLahan.setSlotParkir(objLahan.getSlotParkir() + 1);
 		}
 	}
 	
-	public void tambahKendaraan() {
+	public void tambahKendaraan(LahanParkir[] data) {
 		Scanner input = new Scanner(System.in);
 		Scanner in = new Scanner(System.in);
-		for (int i = 0; i < objLahan.getNomorPolice().length; i++) {
-			if (objLahan.getNomorPolice()[i] != null) {
+		for (int i = 0; i < data.length; i++) {
+			if (data[i].getNomorPolice() != null) {
 				continue;
-			}
-			System.out.print("Masukkan Nomor Police Kendaraan "+(i+1)+" : ");
-			objLahan.setNomorPolice(input.nextLine(), i);
-			kurangiSlotParkir();
-			System.out.println("Apakah Ingin Lanjut Menambahkan ? Input Y/y jika iya");
-			String yY = in.nextLine();
-			yY.toLowerCase();
-			if (yY != "y") {
-				break;
+			}else {
+				System.out.print("Masukkan Nomor Police :");
+				data[i].setNomorPolice(input.nextLine());
+				kurangiSlotParkir();
+				System.out.print("Apakah Ingin Lanjut Menambahkan ? Masukkan Y/y jika iya");
+				String yY = in.nextLine();
+				yY.toLowerCase();
+				if (yY.equals("y")) {
+					continue;
+				}else {
+					break;
+				}
 			}
 		}
 	}
 	
-	public void kendaraanKeluar() {
+	public void keluarKendaraan(LahanParkir[] data) {
 		Scanner input = new Scanner(System.in);
-		for (int i = 0; i < objLahan.getNomorPolice().length; i++) {
-			if (objLahan.getNomorPolice()[i] == null) {
+		
+		for (int i = 0; i < data.length; i++) {
+			if (data[i].getNomorPolice() == null) {
 				System.out.println("Nomor Police Ke "+(i+1)+" : Masih Kosong");
 			}else {
-				System.out.println("Nomor Police Ke "+(i+1)+" : "+objLahan.getNomorPolice()[i]);
+				System.out.println("Nomor Police Ke "+(i+1)+" : "+data[i].getNomorPolice());
 			}
 		}
-		System.out.print("Masukkan nomor keberapa nomor police yang ingin keluar : ");
+		
+		System.out.print("Masukkan nomor keberapa yang ingin anda hapus :");
+		
 		int index = input.nextInt();
-		objLahan.setNomorPolice(null, index-1);
-		tambahSlotParkir();
+		
+		if (index > 0 && index < objLahan.getSlotParkir()) {
+			if (data[index-1].getNomorPolice() == null) {
+				System.out.println("Motor/Lahan Sudah kosong, Silahkan Follow ig @risanjayy");
+			}else {
+				data[index-1].setNomorPolice(null);
+				tambahSlotParkir();
+			}
+		}else {
+			System.out.println("Angka yang anda masukkan salah");
+		}
 	}
 	
-	public void printNomorKendaraan() {
-		for (int i = 0; i < objLahan.getNomorPolice().length; i++) {
-			if (objLahan.getNomorPolice()[i] == null) {
+	public void printNomorKendaraan(LahanParkir[] data) {
+		for (int i = 0; i < data.length; i++) {
+			if (data[i].getNomorPolice() == null) {
 				System.out.println("Nomor Police Ke "+(i+1)+" : Masih Kosong");
 			}else {
-				System.out.println("Nomor Police Ke "+(i+1)+" : "+objLahan.getNomorPolice()[i]);
+				System.out.println("Nomor Police Ke "+(i+1)+" : "+data[i].getNomorPolice());
 			}
 		}
 	}
 	
 	public void start() {
-		objLahan.setSlotParkir(objLahan.getNomorPolice().length);
-		
+		objLahan.setSlotParkir(10);
+		LahanParkir[] arrParkirObj = new LahanParkir[objLahan.getSlotParkir()];
+		for (int i = 0; i < arrParkirObj.length; i++) {
+			arrParkirObj[i] = new LahanParkir();
+		}
 		int inputAngka;
 		do {
 			System.out.println("Simulasi Lahan Parkir");
 			System.out.println("Follow saya @risanjayy");
 			System.out.println("---------------------------");
-			System.out.println("Slot Lahan "+objLahan.getSlotParkir());
+			System.out.println("Slot Lahan Parkir : "+objLahan.getSlotParkir());
+			System.out.println("Slot Lahan ");
 			System.out.println("1. Tambah Motor");
 			System.out.println("2. Keluar Motor");
 			System.out.println("3. Lihat Semua Nomor Police");
@@ -86,13 +105,13 @@ public class MainLahanParkir {
 			
 			switch (inputAngka) {
 			case 1:
-				tambahKendaraan();
+				tambahKendaraan(arrParkirObj);
 				break;
 			case 2:
-				kendaraanKeluar();
+				keluarKendaraan(arrParkirObj);
 				break;
 			case 3:
-				printNomorKendaraan();
+				printNomorKendaraan(arrParkirObj);
 				break;
 			case 4:
 				break;
@@ -104,7 +123,9 @@ public class MainLahanParkir {
 	}
 	
 	public static void main(String[] args) {
+		
 		MainLahanParkir mulai = new MainLahanParkir();
 		mulai.start();
+		
 	}
 }

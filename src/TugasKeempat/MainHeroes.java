@@ -17,7 +17,6 @@ public class MainHeroes {
 				continue;
 			}else {
 				System.out.print("Masukkan nama hero ke "+(i+1)+" : ");
-				hero[i] = new Heroes();
 				hero[i].setNama(inputNama.nextLine());
 				
 				System.out.print("Masukkan Mana hero : ");
@@ -44,20 +43,29 @@ public class MainHeroes {
 	public void ubahHero() {
 		Scanner pilihHeroes = new Scanner(System.in);
 		for (int i = 0; i < hero.length; i++) {
+			if (hero[i].getNama() == null) {
+				System.out.println("Hero Ke "+(i+1)+" : Kosong ");
+			}else {
 			System.out.println("Hero Ke "+(i+1)+" : "+hero[i].getNama());
 			System.out.println("HP : "+hero[i].getHp());
 			System.out.println("Mana : "+hero[i].getMana());
+			}
 		}
 		System.out.print("Pilih Hero yang ingin diubah : ");
 		int indexHeroes = pilihHeroes.nextInt();
-		if (indexHeroes > 0 && indexHeroes < 5) {
-			System.out.print("Masukkan Nama Hero : ");
-			hero[indexHeroes-1].setNama(inputNama.nextLine());
-			System.out.println("Masukkan Mana Hero :");
-			hero[indexHeroes-1].setMana(inputMana.nextInt());
-			System.out.println("Masukkan Hp Hero :");
-			hero[indexHeroes-1].setHp(inputHp.nextInt());
+		if (hero[indexHeroes].getNama() != null) {
+			if (indexHeroes > 0 && indexHeroes < 5) {
+				System.out.print("Masukkan Nama Hero : ");
+				hero[indexHeroes-1].setNama(inputNama.nextLine());
+				System.out.println("Masukkan Mana Hero :");
+				hero[indexHeroes-1].setMana(inputMana.nextInt());
+				System.out.println("Masukkan Hp Hero :");
+				hero[indexHeroes-1].setHp(inputHp.nextInt());
+			}
+		}else {
+			System.out.println("Heronya masieh kosong, silahkan follow ig @risanjayy");
 		}
+		
 	}
 	
 	public void hapusHeroes() {
@@ -77,6 +85,9 @@ public class MainHeroes {
 	}
 	
 	public void start() {
+		for (int i = 0; i < hero.length; i++) {
+			hero[i] = new Heroes();
+		}
 		int inputAngka;
 		Scanner input = new Scanner(System.in);
 		do {

@@ -2,7 +2,7 @@ package TugasKeenam;
 
 public class LahanParkir {
 	private int slotParkir;
-	private String[] nomorPolice = new String[10];
+	private String nomorPolice;
 	
 	public int getSlotParkir() {
 		return slotParkir;
@@ -10,13 +10,11 @@ public class LahanParkir {
 	public void setSlotParkir(int slotParkir) {
 		this.slotParkir = slotParkir;
 	}
-	
-	public String[] getNomorPolice() {
+	public String getNomorPolice() {
 		return nomorPolice;
 	}
-	
-	public void setNomorPolice(String nomorPolice, int i) {
-		this.nomorPolice[i] = nomorPolice;
+	public void setNomorPolice(String nomorPolice) {
+		this.nomorPolice = nomorPolice;
 	}
 	
 }
